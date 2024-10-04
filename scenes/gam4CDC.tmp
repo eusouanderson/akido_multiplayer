@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://b3gycrxbxia2i"]
+[gd_scene load_steps=63 format=3 uid="uid://b3gycrxbxia2i"]
 
 [ext_resource type="Script" path="res://scripts/player1.gd" id="1_etq14"]
 [ext_resource type="Texture2D" uid="uid://teq8fybmohra" path="res://characters/NightBorne.png" id="1_hp0kv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ihet87rq0nvi" path="res://assets/map/Layer_0001_8.png" id="5_rdvke"]
 [ext_resource type="Script" path="res://scripts/player2.gd" id="5_uvm0i"]
 [ext_resource type="Texture2D" uid="uid://tuwmi31kgayt" path="res://assets/map/Layer_0002_7.png" id="7_1hp8r"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="7_5ia07"]
 [ext_resource type="Texture2D" uid="uid://d1gwqrfygqpp5" path="res://assets/map/Layer_0008_3.png" id="7_qc3ax"]
 [ext_resource type="Texture2D" uid="uid://dw30qgtlhk2xv" path="res://assets/map/Layer_0003_6.png" id="8_mksl6"]
 [ext_resource type="Script" path="res://scripts/area_2d.gd" id="12_4kc3c"]
@@ -217,18 +218,6 @@ region = Rect2(80, 640, 80, 80)
 atlas = ExtResource("3_2pl3x")
 region = Rect2(320, 640, 80, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kieak"]
-atlas = ExtResource("3_2pl3x")
-region = Rect2(480, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wqnle"]
-atlas = ExtResource("3_2pl3x")
-region = Rect2(640, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_utohn"]
-atlas = ExtResource("3_2pl3x")
-region = Rect2(560, 0, 80, 80)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_uovm5"]
 atlas = ExtResource("3_2pl3x")
 region = Rect2(160, 560, 80, 80)
@@ -374,20 +363,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kieak")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wqnle")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_utohn")
-}],
-"loop": false,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_uovm5")
 }, {
 "duration": 1.0,
@@ -452,6 +427,17 @@ animations = [{
 radius = 4.01085
 
 [sub_resource type="GDScript" id="GDScript_iy381"]
+script/source = "extends CollisionShape2D
+
+onready var animation_player = $AnimationPlayer  # Referência ao AnimationPlayer
+
+func _ready():
+	add_to_group(\"players\")  # Adiciona este jogador ao grupo \"players\"
+
+# Função para iniciar a animação \"dead\"
+func play_dead_animation():
+	animation_player.play(\"dead\")  # Inicia a animação \"dead\"
+"
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -459,6 +445,23 @@ texture_filter = 1
 texture_repeat = 3
 material = SubResource("ShaderMaterial_nr3vi")
 position = Vector2(47, 9)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(166, 320)
+scale = Vector2(2.50533, 2.54588)
+offset = Vector2(0.345, -36.085)
+ignore_rotation = false
+zoom = Vector2(3, 3)
+process_callback = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 50.0
+rotation_smoothing_speed = 50.15
+drag_vertical_enabled = true
+drag_horizontal_offset = 0.33
+drag_vertical_offset = 0.24
+editor_draw_screen = false
+editor_draw_limits = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-6, 341)
@@ -530,86 +533,71 @@ texture = ExtResource("5_rdvke")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_v0whg")
 
-[node name="Player1" type="CharacterBody2D" parent="MultiplayerSynchronizer"]
-position = Vector2(41, 333)
+[node name="CharacterBody2D" type="CharacterBody2D" parent="MultiplayerSynchronizer"]
+position = Vector2(213, 329)
 scale = Vector2(2.50533, 2.54588)
+script = ExtResource("7_5ia07")
+
+[node name="Player1" type="CharacterBody2D" parent="MultiplayerSynchronizer/CharacterBody2D"]
+position = Vector2(-68.6536, 1.57115)
+scale = Vector2(1, 1)
 script = ExtResource("1_etq14")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MultiplayerSynchronizer/Player1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player1"]
 texture_repeat = 3
 material = SubResource("ShaderMaterial_bhom2")
 position = Vector2(1.5966, 3.92791)
 rotation = 0.0856421
 scale = Vector2(0.77113, 0.752717)
 sprite_frames = SubResource("SpriteFrames_m5qgk")
-animation = &"jump"
+animation = &"attack"
 autoplay = "idle"
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="MultiplayerSynchronizer/Player1"]
-remote_path = NodePath("../../Camera2D")
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player1"]
+remote_path = NodePath("../../../../Camera2D")
 
-[node name="CollisionMap" type="CollisionShape2D" parent="MultiplayerSynchronizer/Player1"]
-position = Vector2(2.39489, -1.57115)
+[node name="CollisionMap" type="CollisionShape2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player1"]
+position = Vector2(-0.7983, 1.96396)
 rotation = 0.0593412
 scale = Vector2(1.04801, 2.52813)
 shape = SubResource("CircleShape2D_j3fy1")
 script = SubResource("GDScript_iy381")
 
-[node name="Area2D" type="Area2D" parent="MultiplayerSynchronizer/Player1"]
+[node name="Area2D" type="Area2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player1"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MultiplayerSynchronizer/Player1/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player1/Area2D"]
 polygon = PackedVector2Array(-7.18468, -11.7837, -9.18043, -11.7837, -9.18043, -9.42699, -4.78979, -3.92791, -2.39489, -7.85582, -5.98724, -11.3909, -7.58383, -13.3549)
 
-[node name="Camera2D" type="Camera2D" parent="MultiplayerSynchronizer"]
-position = Vector2(213, 329)
-scale = Vector2(2.50533, 2.54588)
-offset = Vector2(0.345, -36.085)
-ignore_rotation = false
-zoom = Vector2(3, 3)
-process_callback = 0
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 50.0
-rotation_smoothing_speed = 50.15
-drag_vertical_enabled = true
-drag_horizontal_offset = 0.33
-drag_vertical_offset = 0.24
-editor_draw_screen = false
-editor_draw_limits = true
-
-[node name="Player2" type="CharacterBody2D" parent="MultiplayerSynchronizer"]
-position = Vector2(213, 329)
-scale = Vector2(2.50533, 2.54588)
+[node name="Player2" type="CharacterBody2D" parent="MultiplayerSynchronizer/CharacterBody2D"]
+scale = Vector2(1, 1)
 script = ExtResource("5_uvm0i")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MultiplayerSynchronizer/Player2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player2"]
 texture_repeat = 3
 material = SubResource("ShaderMaterial_bhom2")
 position = Vector2(1.5966, 3.92791)
 rotation = 0.0856421
 scale = Vector2(0.77113, 0.752717)
 sprite_frames = SubResource("SpriteFrames_m5qgk")
-animation = &"jump"
-autoplay = "jump"
-frame = 2
-frame_progress = 1.0
+animation = &"attack"
+autoplay = "idle"
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="MultiplayerSynchronizer/Player2"]
-remote_path = NodePath("../../Camera2D")
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player2"]
+remote_path = NodePath("../../../../Camera2D")
 
-[node name="CollisionMap" type="CollisionShape2D" parent="MultiplayerSynchronizer/Player2"]
-position = Vector2(1.19744, -1.90735e-06)
+[node name="CollisionMap" type="CollisionShape2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player2"]
+position = Vector2(-0.798294, 1.96394)
 rotation = 0.0593412
 scale = Vector2(1.04801, 2.52813)
 shape = SubResource("CircleShape2D_j3fy1")
 script = SubResource("GDScript_iy381")
 
-[node name="Area2D" type="Area2D" parent="MultiplayerSynchronizer/Player2"]
+[node name="Area2D" type="Area2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player2"]
 position = Vector2(-66.2587, -125.693)
 scale = Vector2(0.399149, 0.392791)
 script = ExtResource("12_4kc3c")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MultiplayerSynchronizer/Player2/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MultiplayerSynchronizer/CharacterBody2D/Player2/Area2D"]
 position = Vector2(-193, 89)
 scale = Vector2(1, 1)
 polygon = PackedVector2Array(347, 219, 336, 207, 336, 201, 345, 201, 353, 212, 347, 217)
