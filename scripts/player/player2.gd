@@ -1,6 +1,14 @@
-## Player2 — Jogador 2 (teclado WASD + mouse, controlado remotamente via rede).
+## Player2 — Jogador 2.
 ##
-## Herda todo o comportamento de PlayerBase sem modificações adicionais.
-## Fica separado para facilitar customizações futuras (ex.: controle via rede,
-## skin diferente, bônus de atributos).
+## Usa player_id = 2 → lê ações p2_* (Setas + J/K por padrão).
+## Em modo SOLO se desativa automaticamente.
 extends "res://scripts/player/player_base.gd"
+
+func _ready() -> void:
+	player_id = 2
+	# Em modo Solo o jogador 2 não existe
+	if GameState.game_mode == GameState.GameMode.SOLO:
+		process_mode = PROCESS_MODE_DISABLED
+		visible      = false
+		return
+	super._ready()

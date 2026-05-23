@@ -1,15 +1,16 @@
-## Player1 — Jogador 1 (teclado WASD + mouse).
+## Player1 — Jogador 1.
 ##
-## Estende PlayerBase adicionando comportamento de pulo com ataque:
-## se o jogador pular enquanto estiver atacando, reproduz "jump_attack".
+## Usa player_id = 1 → lê ações p1_* (WASD + mouse por padrão).
+## Override de _handle_jump: pulo-ataque quando estiver no meio de um ataque.
 extends "res://scripts/player/player_base.gd"
+
+func _ready() -> void:
+	player_id = 1
+	super._ready()
 
 # ── Pulo com ataque ──────────────────────────────────────────────────────────
 
 func _handle_jump() -> void:
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if _just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		if is_attacking or is_mega_attacking:
-			animated_sprite.play("jump_attack")
-		else:
-			animated_sprite.play("jump")
+		animated_sprite.play("jump_attack" if (is_attacking or is_mega_attacking) else "jump")
