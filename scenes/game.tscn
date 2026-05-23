@@ -1,16 +1,16 @@
 [gd_scene load_steps=65 format=3 uid="uid://b3gycrxbxia2i"]
 
-[ext_resource type="Script" path="res://scripts/player1.gd" id="1_etq14"]
+[ext_resource type="Script" path="res://scripts/player/player1.gd" id="1_etq14"]
 [ext_resource type="Texture2D" uid="uid://teq8fybmohra" path="res://characters/NightBorne.png" id="1_hp0kv"]
 [ext_resource type="Texture2D" uid="uid://b2kyv0euc76gi" path="res://characters/NightBorne.png.png" id="3_2pl3x"]
 [ext_resource type="Shader" uid="uid://crnlvlg0sd123" path="res://scenes/game.tres" id="4_u85mk"]
 [ext_resource type="Texture2D" uid="uid://h5mosjru54i8" path="res://assets/map/Layer_0000_9.png" id="5_nxjua"]
 [ext_resource type="Texture2D" uid="uid://ihet87rq0nvi" path="res://assets/map/Layer_0001_8.png" id="5_rdvke"]
-[ext_resource type="Script" path="res://scripts/player2.gd" id="5_uvm0i"]
+[ext_resource type="Script" path="res://scripts/player/player2.gd" id="5_uvm0i"]
 [ext_resource type="Texture2D" uid="uid://tuwmi31kgayt" path="res://assets/map/Layer_0002_7.png" id="7_1hp8r"]
 [ext_resource type="Texture2D" uid="uid://d1gwqrfygqpp5" path="res://assets/map/Layer_0008_3.png" id="7_qc3ax"]
 [ext_resource type="Texture2D" uid="uid://dw30qgtlhk2xv" path="res://assets/map/Layer_0003_6.png" id="8_mksl6"]
-[ext_resource type="Script" path="res://scripts/area_2d.gd" id="12_4kc3c"]
+[ext_resource type="Script" path="res://scripts/world/area_2d.gd" id="12_4kc3c"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_hku06"]
 

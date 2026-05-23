@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=3 uid="uid://akido_lobb01"]
+
+[ext_resource type="Script" path="res://scripts/ui/lobby.gd" id="1_lobb01"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lobb01")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0509804, 0.0509804, 0.0980392, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(480, 0)
+theme_override_font_sizes/font_size = 36
+text = "Jogar Online"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(480, 8)
+
+[node name="BtnHost" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(480, 60)
+theme_override_font_sizes/font_size = 22
+text = "Hospedar Partida"
+
+[node name="JoinLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+modulate = Color(0.8, 0.8, 0.8, 1)
+text = "— ou entre em uma partida —"
+horizontal_alignment = 1
+
+[node name="JoinContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AddressInput" type="LineEdit" parent="CenterContainer/VBoxContainer/JoinContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(320, 50)
+theme_override_font_sizes/font_size = 20
+placeholder_text = "IP do servidor (ex: 192.168.0.10)"
+text = "127.0.0.1"
+
+[node name="BtnJoin" type="Button" parent="CenterContainer/VBoxContainer/JoinContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(148, 50)
+theme_override_font_sizes/font_size = 20
+text = "Entrar"
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(480, 40)
+theme_override_font_sizes/font_size = 16
+modulate = Color(0.9, 0.85, 0.4, 1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(480, 8)
+
+[node name="BtnBack" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(480, 55)
+theme_override_font_sizes/font_size = 20
+text = "← Voltar ao Menu"
