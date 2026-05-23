@@ -10,10 +10,12 @@ func _ready() -> void:
 	$CenterContainer/VBoxContainer/JoinContainer/BtnJoin.pressed.connect(_on_btn_join_pressed)
 	$CenterContainer/VBoxContainer/BtnBack.pressed.connect(_on_btn_back_pressed)
 
-	multiplayer.peer_connected.connect(_on_peer_connected)
-	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	multiplayer.connected_to_server.connect(_on_connected_to_server)
-	multiplayer.connection_failed.connect(_on_connection_failed)
+	# multiplayer só está disponível quando o nó está na SceneTree
+	if is_inside_tree() and multiplayer:
+		multiplayer.peer_connected.connect(_on_peer_connected)
+		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+		multiplayer.connected_to_server.connect(_on_connected_to_server)
+		multiplayer.connection_failed.connect(_on_connection_failed)
 
 func _on_btn_host_pressed() -> void:
 	peer = ENetMultiplayerPeer.new()
