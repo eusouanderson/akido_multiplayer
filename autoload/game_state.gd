@@ -79,11 +79,11 @@ func _rebuild_joypad_events(player_id: int) -> void:
 	var device  := get_player_device(player_id)
 
 	# Remove eventos de joypad existentes
-	for suffix in ["left", "right", "jump", "attack", "mega_attack"]:
-		var action := prefix + suffix
+	for suffix: String in ["left", "right", "jump", "attack", "mega_attack"]:
+		var action: String = prefix + suffix
 		if not InputMap.has_action(action):
 			continue
-		for event in InputMap.action_get_events(action).duplicate():
+		for event: InputEvent in InputMap.action_get_events(action).duplicate():
 			if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 				InputMap.action_erase_event(action, event)
 
