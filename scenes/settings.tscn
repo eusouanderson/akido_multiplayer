@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://akido_sett01"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings.gd" id="1_sett01"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sett01")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0509804, 0.0509804, 0.0980392, 1)
+
+[node name="CC" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CC"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(460, 0)
+theme_override_font_sizes/font_size = 36
+text = "Configurações"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(460, 8)
+
+[node name="MasterVolRow" type="HBoxContainer" parent="CC/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MasterVolLabel" type="Label" parent="CC/VBox/MasterVolRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 0)
+theme_override_font_sizes/font_size = 20
+text = "Volume Geral"
+vertical_alignment = 1
+
+[node name="MasterVolSlider" type="HSlider" parent="CC/VBox/MasterVolRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(260, 40)
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="FullscreenCheck" type="CheckBox" parent="CC/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Tela Cheia"
+
+[node name="HSeparator2" type="HSeparator" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(460, 8)
+
+[node name="BtnControls" type="Button" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(460, 60)
+theme_override_font_sizes/font_size = 22
+text = "🎮  Configurar Controles"
+
+[node name="BtnBack" type="Button" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(460, 60)
+theme_override_font_sizes/font_size = 22
+text = "← Voltar ao Menu"

@@ -1,0 +1,222 @@
+[gd_scene load_steps=2 format=3 uid="uid://akido_ctrl01"]
+
+[ext_resource type="Script" path="res://scripts/ui/controls.gd" id="1_ctrl01"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ctrl01")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0509804, 0.0509804, 0.0980392, 1)
+
+[node name="CC" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CC"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 0)
+theme_override_font_sizes/font_size = 34
+text = "Controles"
+horizontal_alignment = 1
+
+[node name="HSep0" type="HSeparator" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 8)
+
+[node name="P1Label" type="Label" parent="CC/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Jogador 1"
+
+[node name="P1Row" type="HBoxContainer" parent="CC/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="P1DevLabel" type="Label" parent="CC/VBox/P1Row"]
+layout_mode = 2
+custom_minimum_size = Vector2(140, 0)
+theme_override_font_sizes/font_size = 18
+text = "Dispositivo:"
+vertical_alignment = 1
+
+[node name="P1DeviceOption" type="OptionButton" parent="CC/VBox/P1Row"]
+layout_mode = 2
+custom_minimum_size = Vector2(360, 48)
+theme_override_font_sizes/font_size = 18
+
+[node name="P2Label" type="Label" parent="CC/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Jogador 2"
+
+[node name="P2Row" type="HBoxContainer" parent="CC/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="P2DevLabel" type="Label" parent="CC/VBox/P2Row"]
+layout_mode = 2
+custom_minimum_size = Vector2(140, 0)
+theme_override_font_sizes/font_size = 18
+text = "Dispositivo:"
+vertical_alignment = 1
+
+[node name="P2DeviceOption" type="OptionButton" parent="CC/VBox/P2Row"]
+layout_mode = 2
+custom_minimum_size = Vector2(360, 48)
+theme_override_font_sizes/font_size = 18
+
+[node name="HSep1" type="HSeparator" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 8)
+
+[node name="KeymapTitle" type="Label" parent="CC/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+modulate = Color(0.85, 0.85, 0.85, 1)
+text = "Mapeamento padrão de teclas:"
+
+[node name="KeymapGrid" type="GridContainer" parent="CC/VBox"]
+layout_mode = 2
+columns = 3
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 6
+
+[node name="LblAcao" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+modulate = Color(0.7, 0.7, 1, 1)
+text = "Ação"
+
+[node name="LblP1" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+modulate = Color(0.7, 0.7, 1, 1)
+text = "Teclado P1 (WASD)"
+
+[node name="LblP2" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+modulate = Color(0.7, 0.7, 1, 1)
+text = "Teclado P2 (Setas)"
+
+[node name="R1a" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Mover"
+
+[node name="R1b" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "A / D"
+
+[node name="R1c" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "← / →"
+
+[node name="R2a" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Pular"
+
+[node name="R2b" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "W / Espaço"
+
+[node name="R2c" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "↑"
+
+[node name="R3a" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Ataque"
+
+[node name="R3b" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Mouse Esq."
+
+[node name="R3c" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "J"
+
+[node name="R4a" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Mega Ataque"
+
+[node name="R4b" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Mouse Dir."
+
+[node name="R4c" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "K"
+
+[node name="R5a" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Joypad"
+
+[node name="R5b" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+modulate = Color(0.7, 0.9, 0.7, 1)
+text = "Analógico/D-Pad + A/X/Y"
+
+[node name="R5c" type="Label" parent="CC/VBox/KeymapGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+modulate = Color(0.7, 0.9, 0.7, 1)
+text = "Analógico/D-Pad + A/X/Y"
+
+[node name="HSep2" type="HSeparator" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 8)
+
+[node name="JoysticksLabel" type="Label" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 0)
+theme_override_font_sizes/font_size = 15
+text = "Nenhum controle externo detectado."
+autowrap_mode = 3
+
+[node name="TestLabel" type="Label" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 28)
+theme_override_font_sizes/font_size = 15
+modulate = Color(0.4, 1, 0.4, 1)
+text = ""
+horizontal_alignment = 1
+
+[node name="BtnBack" type="Button" parent="CC/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 55)
+theme_override_font_sizes/font_size = 20
+text = "← Voltar às Configurações"
