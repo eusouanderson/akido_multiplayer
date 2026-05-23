@@ -1,3 +1,36 @@
-# Godot 4+ specific ignores
+# ── Godot ────────────────────────────────────────────────────────────────────
+# Cache de importação e metadados gerados pelo editor
 .godot/
+
+# Artefatos temporários do editor (saves automáticos)
+*.tmp
+
+# Arquivos de UID são regenerados pelo Godot; não precisam ir pro git
+*.uid
+
+# ── Plataformas mobile/desktop ───────────────────────────────────────────────
 /android/
+/ios/
+
+# ── Exportações ──────────────────────────────────────────────────────────────
+/export/
+/builds/
+*.pck
+*.exe
+*.apk
+*.aab
+*.dmg
+
+# ── Arquivos de fonte / edição (não são assets do jogo) ──────────────────────
+# Pixelorama
+*.pxo
+
+# Photoshop / Aseprite
+*.psd
+*.ase
+*.aseprite
+
+# ── SO ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
