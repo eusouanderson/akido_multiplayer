@@ -41,7 +41,10 @@ var _cam2: Camera2D
 var _screen_layer: CanvasLayer
 var _split_root: Control
 
-var _is_split: bool = false
+var _is_split: bool    = false
+## Sinaliza que _ready() terminou (incluindo o await).
+## _process() ignora frames enquanto ainda estiver inicializando.
+var _initialized: bool = false
 
 # ── Ciclo de vida ────────────────────────────────────────────────────────────
 
@@ -69,6 +72,7 @@ func _ready() -> void:
 
 	_build_split_ui()
 	_set_split(false)
+	_initialized = true   # só aqui _process() pode rodar com segurança
 
 # ── Construção da UI de split ────────────────────────────────────────────────
 
@@ -165,6 +169,10 @@ func _make_vp_container(vp: SubViewport) -> SubViewportContainer:
 # ── Loop de atualização ──────────────────────────────────────────────────────
 
 func _process(delta: float) -> void:
+	# Aguarda o await do _ready() terminar antes de acessar qualquer nó.
+	# Sem esse guard, _process() roda no frame seguinte ao await com _cam1/2 = null.
+	if not _initialized:
+		return
 	if not is_instance_valid(_player1) or not is_instance_valid(_player2):
 		return
 
