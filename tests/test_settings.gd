@@ -19,10 +19,10 @@ func test_nos_existem() -> void:
 	if settings == null: return
 
 	var nos = [
-		"CenterContainer/VBoxContainer/Title",
-		"CenterContainer/VBoxContainer/MasterVolContainer/MasterVolSlider",
-		"CenterContainer/VBoxContainer/FullscreenCheck",
-		"CenterContainer/VBoxContainer/BtnBack",
+		"CC/VBox/Title",
+		"CC/VBox/MasterVolRow/MasterVolSlider",
+		"CC/VBox/FullscreenCheck",
+		"CC/VBox/BtnBack",
 	]
 	for path in nos:
 		runner.assert_not_null(
@@ -37,7 +37,7 @@ func test_slider_limites() -> void:
 	if settings == null: return
 
 	var slider = settings.get_node_or_null(
-		"CenterContainer/VBoxContainer/MasterVolContainer/MasterVolSlider"
+		"CC/VBox/MasterVolRow/MasterVolSlider"
 	)
 	if slider:
 		runner.assert_eq(slider.min_value, 0.0, "Slider min_value = 0.0")
@@ -51,7 +51,7 @@ func test_botao_voltar_existe() -> void:
 	var settings = _instanciar()
 	if settings == null: return
 
-	var btn = settings.get_node_or_null("CenterContainer/VBoxContainer/BtnBack")
+	var btn = settings.get_node_or_null("CC/VBox/BtnBack")
 	runner.assert_not_null(btn, "Botão Voltar existe")
 	if btn:
 		runner.assert_true(btn.text.length() > 0, "Botão Voltar tem texto")
@@ -62,7 +62,7 @@ func test_botao_voltar_conectado() -> void:
 	var settings = _instanciar_com_sinais()
 	if settings == null: return
 
-	var btn = settings.get_node_or_null("CenterContainer/VBoxContainer/BtnBack")
+	var btn = settings.get_node_or_null("CC/VBox/BtnBack")
 	runner.assert_true(
 		btn != null and btn.pressed.get_connections().size() > 0,
 		"BtnBack tem sinal 'pressed' conectado"

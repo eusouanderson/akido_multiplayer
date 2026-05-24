@@ -34,10 +34,10 @@ func test_botoes_existem() -> void:
 	if menu == null: return
 
 	var botoes = [
-		"CenterContainer/VBoxContainer/BtnPlayLocal",
-		"CenterContainer/VBoxContainer/BtnPlayOnline",
-		"CenterContainer/VBoxContainer/BtnSettings",
-		"CenterContainer/VBoxContainer/BtnQuit",
+		"CC/VBox/BtnPlayLocal",
+		"CC/VBox/BtnPlayOnline",
+		"CC/VBox/BtnSettings",
+		"CC/VBox/BtnQuit",
 	]
 	for path in botoes:
 		var node = menu.get_node_or_null(path)
@@ -48,7 +48,7 @@ func test_botoes_existem() -> void:
 func test_titulo_existe() -> void:
 	var menu = _instanciar()
 	if menu == null: return
-	var title = menu.get_node_or_null("CenterContainer/VBoxContainer/Title")
+	var title = menu.get_node_or_null("CC/VBox/Title")
 	runner.assert_not_null(title, "Label de título existe")
 	if title:
 		runner.assert_true(title.text.length() > 0, "Título não está vazio")
@@ -60,10 +60,10 @@ func test_textos_dos_botoes() -> void:
 	if menu == null: return
 
 	var esperados = {
-		"CenterContainer/VBoxContainer/BtnPlayLocal":   "Jogar Local (2 Jogadores)",
-		"CenterContainer/VBoxContainer/BtnPlayOnline":  "Jogar Online",
-		"CenterContainer/VBoxContainer/BtnSettings":    "Configurações",
-		"CenterContainer/VBoxContainer/BtnQuit":        "Sair",
+		"CC/VBox/BtnPlayLocal":   "Jogar Local (2 Jogadores)",
+		"CC/VBox/BtnPlayOnline":  "Jogar Online",
+		"CC/VBox/BtnSettings":    "Configurações",
+		"CC/VBox/BtnQuit":        "Sair",
 	}
 	for path in esperados:
 		var node = menu.get_node_or_null(path)
@@ -77,7 +77,7 @@ func test_textos_dos_botoes() -> void:
 func test_botao_play_local_conectado() -> void:
 	var menu = _instanciar_com_sinais()
 	if menu == null: return
-	var btn = menu.get_node_or_null("CenterContainer/VBoxContainer/BtnPlayLocal")
+	var btn = menu.get_node_or_null("CC/VBox/BtnPlayLocal")
 	runner.assert_true(
 		btn != null and btn.pressed.get_connections().size() > 0,
 		"BtnPlayLocal tem sinal 'pressed' conectado"
@@ -87,7 +87,7 @@ func test_botao_play_local_conectado() -> void:
 func test_botao_play_online_conectado() -> void:
 	var menu = _instanciar_com_sinais()
 	if menu == null: return
-	var btn = menu.get_node_or_null("CenterContainer/VBoxContainer/BtnPlayOnline")
+	var btn = menu.get_node_or_null("CC/VBox/BtnPlayOnline")
 	runner.assert_true(
 		btn != null and btn.pressed.get_connections().size() > 0,
 		"BtnPlayOnline tem sinal 'pressed' conectado"
@@ -97,7 +97,7 @@ func test_botao_play_online_conectado() -> void:
 func test_botao_settings_conectado() -> void:
 	var menu = _instanciar_com_sinais()
 	if menu == null: return
-	var btn = menu.get_node_or_null("CenterContainer/VBoxContainer/BtnSettings")
+	var btn = menu.get_node_or_null("CC/VBox/BtnSettings")
 	runner.assert_true(
 		btn != null and btn.pressed.get_connections().size() > 0,
 		"BtnSettings tem sinal 'pressed' conectado"
@@ -107,7 +107,7 @@ func test_botao_settings_conectado() -> void:
 func test_botao_quit_conectado() -> void:
 	var menu = _instanciar_com_sinais()
 	if menu == null: return
-	var btn = menu.get_node_or_null("CenterContainer/VBoxContainer/BtnQuit")
+	var btn = menu.get_node_or_null("CC/VBox/BtnQuit")
 	runner.assert_true(
 		btn != null and btn.pressed.get_connections().size() > 0,
 		"BtnQuit tem sinal 'pressed' conectado"
