@@ -66,7 +66,7 @@ func test_status_label_vazio_no_inicio() -> void:
 	lobby.free()
 
 func test_constante_porta() -> void:
-	var script = load("res://scripts/lobby.gd")
+	var script = load("res://scripts/ui/lobby.gd")
 	runner.assert_not_null(script, "lobby.gd carrega sem erros")
 	# Verifica que a porta está dentro de um range válido (1024–65535)
 	var lobby = _instanciar()

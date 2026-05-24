@@ -1,22 +1,28 @@
 ## Test Runner para o Akido Multiplayer
-## Execute via: flatpak run org.godotengine.Godot --path . --headless -- --script tests/test_runner.gd
+## Execute via: flatpak run org.godotengine.Godot --path . --script tests/test_runner.gd
 extends SceneTree
 
-const COLOR_OK    = "[32m"  # verde
-const COLOR_FAIL  = "[31m"  # vermelho
-const COLOR_RESET = "[0m"
-const COLOR_TITLE = "[36m"  # ciano
+const COLOR_OK    = "[32m"  # verde
+const COLOR_FAIL  = "[31m"  # vermelho
+const COLOR_RESET = "[0m"
+const COLOR_TITLE = "[36m"  # ciano
 
 var _passed := 0
 var _failed := 0
 var _total  := 0
 
 func _initialize() -> void:
-	print("\n%s═══ AKIDO MULTIPLAYER — TESTES DE MENU ═══%s\n" % [COLOR_TITLE, COLOR_RESET])
+	print("\n%s═══ AKIDO MULTIPLAYER — SUITE DE TESTES ═══%s\n" % [COLOR_TITLE, COLOR_RESET])
 
+	# load() (runtime) em vez de preload() (compile-time) para que GameState
+	# (autoload) já esteja registrado quando o script for compilado.
+	run_suite("GameState",         load("res://tests/test_game_state.gd").new())
+	run_suite("Player",            preload("res://tests/test_player.gd").new())
 	run_suite("Menu Principal",    preload("res://tests/test_menu.gd").new())
 	run_suite("Configurações",     preload("res://tests/test_settings.gd").new())
 	run_suite("Lobby Online",      preload("res://tests/test_lobby.gd").new())
+	run_suite("Menu de Pausa",     preload("res://tests/test_pause_menu.gd").new())
+	run_suite("Controles",         preload("res://tests/test_controls.gd").new())
 
 	print("\n%s───────────────────────────────────%s" % [COLOR_TITLE, COLOR_RESET])
 	var status_color = COLOR_OK if _failed == 0 else COLOR_FAIL
