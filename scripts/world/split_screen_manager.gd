@@ -123,7 +123,7 @@ func _build_split_ui() -> void:
 func _make_viewport(sz: Vector2i) -> SubViewport:
 	var vp := SubViewport.new()
 	vp.size                     = sz
-	vp.own_world_2d             = false   # Compartilha física e canvas com a cena principal
+	vp.world_2d                 = get_viewport().world_2d   # Compartilha física e canvas com a cena principal
 	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	vp.handle_input_locally     = false
 	vp.transparent_bg           = false
@@ -225,10 +225,13 @@ func _set_split(split: bool) -> void:
 		if is_instance_valid(_main_bg_layer):
 			_main_bg_layer.show()
 
-		# Snap imediato para evitar salto de câmera ao mesclar:
-		# usa a posição ATUAL das câmeras de split (que já estão próximas dos players)
-		# para iniciar a câmera principal já no lugar certo.
-		var mid: Vector2 = (_cam1.global_position + _cam2.global_position) * 0.5
+		# Snap imediato para evitar salto de câmera ao mesclar.
+		# Usa as câmeras de split se válidas; caso contrário, usa os próprios players.
+		var mid: Vector2
+		if is_instance_valid(_cam1) and is_instance_valid(_cam2):
+			mid = (_cam1.global_position + _cam2.global_position) * 0.5
+		else:
+			mid = (_player1.global_position + _player2.global_position) * 0.5
 		_main_camera.position_smoothing_enabled = false
 		_main_camera.global_position            = mid
 		_main_camera.position_smoothing_enabled = true
