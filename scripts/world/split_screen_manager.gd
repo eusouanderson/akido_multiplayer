@@ -91,23 +91,18 @@ func _build_split_ui() -> void:
 	_split_root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_screen_layer.add_child(_split_root)
 
-	# Cria os dois SubViewports compartilhando o World2D da cena
-	_vp1 = _make_viewport(Vector2i(half_w, vp_h))
-	_vp2 = _make_viewport(Vector2i(half_w, vp_h))
-	get_parent().add_child(_vp1)
-	get_parent().add_child(_vp2)
-
-	# Câmeras dentro de cada SubViewport
-	_cam1 = _make_camera(_vp1)
-	_cam2 = _make_camera(_vp2)
-
 	# Container horizontal: [VP1] [divisória] [VP2]
 	var hbox := HBoxContainer.new()
 	hbox.set_anchors_preset(Control.PRESET_FULL_RECT)
 	hbox.add_theme_constant_override("separation", 0)
 	_split_root.add_child(hbox)
 
-	hbox.add_child(_make_vp_container(_vp1))
+	# ⚠️  Cada SubViewport entra na árvore UMA ÚNICA VEZ, via SubViewportContainer.
+	#     Não usar get_parent().add_child(_vpN) antes disso — causaria double-parenting:
+	#     o Godot 4 remove o SubViewport do pai atual ao reparentar, liberando-o junto
+	#     com os filhos (incluindo as câmeras), tornando _cam1/_cam2 inválidos (Nil).
+	_vp1 = _make_viewport(Vector2i(half_w, vp_h))
+	hbox.add_child(_make_vp_container(_vp1))   # _vp1 entra na árvore aqui
 
 	var divider := ColorRect.new()
 	divider.color = Color(0.0, 0.0, 0.0, 1.0)
@@ -115,7 +110,12 @@ func _build_split_ui() -> void:
 	divider.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	hbox.add_child(divider)
 
-	hbox.add_child(_make_vp_container(_vp2))
+	_vp2 = _make_viewport(Vector2i(half_w, vp_h))
+	hbox.add_child(_make_vp_container(_vp2))   # _vp2 entra na árvore aqui
+
+	# Câmeras criadas APÓS os SubViewports estarem na árvore — make_current() precisa disso
+	_cam1 = _make_camera(_vp1)
+	_cam2 = _make_camera(_vp2)
 
 	# Redimensiona os SubViewports quando a janela muda
 	get_viewport().size_changed.connect(_on_viewport_resized)
@@ -186,6 +186,11 @@ func _process(delta: float) -> void:
 	_update_cameras(delta)
 
 func _update_cameras(delta: float) -> void:
+	if not is_instance_valid(_cam1) or not is_instance_valid(_cam2):
+		return
+	if not is_instance_valid(_main_camera):
+		return
+
 	var p1: Vector2 = _player1.global_position
 	var p2: Vector2 = _player2.global_position
 
@@ -203,6 +208,9 @@ func _update_cameras(delta: float) -> void:
 
 func _set_split(split: bool) -> void:
 	_is_split = split
+
+	if not is_instance_valid(_split_root) or not is_instance_valid(_main_camera):
+		return
 
 	if split:
 		# Ativa split-screen
