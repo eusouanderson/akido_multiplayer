@@ -104,4 +104,4 @@ akido_multiplayer/
 
 ## 👥 Equipe
 
-Desenvolvido por **Bob** — Faculdade Impacta (anderson.rsilva@aluno.impacta.edu.br)
+Desenvolvido por **Bob** 

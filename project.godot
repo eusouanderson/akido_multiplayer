@@ -8,10 +8,6 @@
 
 config_version=5
 
-[autoload]
-
-GameState="*res://autoload/game_state.gd"
-
 [animation]
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
@@ -23,10 +19,15 @@ run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*res://autoload/game_state.gd"
+
 [display]
 
-window/stretch/mode="canvas_items"
-window/stretch/scale=0.91
+window/size/viewport_width=928
+window/size/viewport_height=793
+window/stretch/mode="viewport"
 
 [input]
 

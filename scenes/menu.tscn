@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://akido_menu01"]
+[gd_scene format=3 uid="uid://bpo086sacnf3o"]
 
-[ext_resource type="Script" path="res://scripts/ui/menu.gd" id="1_menu01"]
+[ext_resource type="Script" uid="uid://c3p3pat8tvlg7" path="res://scripts/ui/menu.gd" id="1_menu01"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1450299970]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu01")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1873341913]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0509804, 0.0509804, 0.0980392, 1)
 
-[node name="CC" type="CenterContainer" parent="."]
+[node name="CC" type="CenterContainer" parent="." unique_id=586881498]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,54 +28,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="CC"]
+[node name="VBox" type="VBoxContainer" parent="CC" unique_id=636001016]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="CC/VBox"]
-layout_mode = 2
+[node name="Title" type="Label" parent="CC/VBox" unique_id=683115466]
 custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
 theme_override_font_sizes/font_size = 46
 text = "AKIDO MULTIPLAYER"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="CC/VBox"]
+[node name="Subtitle" type="Label" parent="CC/VBox" unique_id=432874233]
+modulate = Color(0.7, 0.7, 0.7, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-modulate = Color(0.7, 0.7, 0.7, 1)
-text = "Jogo de Luta 2D"
+text = "Jogo 2d"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CC/VBox"]
-layout_mode = 2
+[node name="HSeparator" type="HSeparator" parent="CC/VBox" unique_id=1887783079]
 custom_minimum_size = Vector2(440, 8)
-
-[node name="BtnPlaySolo" type="Button" parent="CC/VBox"]
 layout_mode = 2
+
+[node name="BtnPlaySolo" type="Button" parent="CC/VBox" unique_id=536331478]
 custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Jogar Solo (1 Jogador)"
 
-[node name="BtnPlayLocal" type="Button" parent="CC/VBox"]
-layout_mode = 2
+[node name="BtnPlayLocal" type="Button" parent="CC/VBox" unique_id=679663443]
 custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Jogar Local (2 Jogadores)"
 
-[node name="BtnPlayOnline" type="Button" parent="CC/VBox"]
-layout_mode = 2
+[node name="BtnPlayOnline" type="Button" parent="CC/VBox" unique_id=541579242]
 custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Jogar Online"
 
-[node name="BtnSettings" type="Button" parent="CC/VBox"]
-layout_mode = 2
+[node name="BtnSettings" type="Button" parent="CC/VBox" unique_id=383225165]
 custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Configurações"
 
-[node name="BtnQuit" type="Button" parent="CC/VBox"]
-layout_mode = 2
+[node name="BtnQuit" type="Button" parent="CC/VBox" unique_id=709444872]
 custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Sair"
